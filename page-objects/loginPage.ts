@@ -1,6 +1,5 @@
 import { expect, Page } from '@playwright/test'
 
-
 export class LoginPage {
     private readonly usernameField: string;
     private readonly passwordField: string;

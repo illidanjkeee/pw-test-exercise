@@ -11,6 +11,6 @@ The automation covers the following points from the checklist:
 - Data persistence across sessions
 - Error handling for invalid inputs
 
-The screenshot below shows what exactly was automated:
+The screenshot below with selected fields shows what exactly was automated:
 
-![alt text](image.png)
+![alt text](image-1.png)
