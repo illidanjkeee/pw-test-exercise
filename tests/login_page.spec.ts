@@ -12,21 +12,21 @@ test.describe('Login Tests', () => {
 
   const loginTestCases = [
     {
-      description: 'Login with valid credentials',
+      description: 'Should successfully login with valid credentials',
       username: credentials.validUser.username,
       password: credentials.validUser.password,
       shouldSucceed: true,
     },
     {
-      description: 'Login with incorrect username',
-      username: credentials.invalidUsername, // Incorrect username
+      description: 'Should not login with invalid username',
+      username: credentials.invalidUsername, // Invalid username
       password: credentials.validUser.password,
       shouldSucceed: false,
     },
     {
-      description: 'Login with incorrect password',
+      description: 'Should not login with invalid password',
       username: credentials.validUser.username,
-      password: credentials.invalidPassword, // Incorrect password
+      password: credentials.invalidPassword, // Invalid password
       shouldSucceed: false,
     },
   ];
