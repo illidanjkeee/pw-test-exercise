@@ -1,18 +1,47 @@
 import { test, expect } from '@playwright/test';
+import { LoginPage } from '../page-objects/loginPage';
+const credentials = require('../util/credentials.json');
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+test.describe('Login Tests', () => {
+  let loginPage: LoginPage;
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
+  test.beforeEach(async ({ page }) => {
+    loginPage = new LoginPage();
+    await loginPage.navigateToLoginPage(page);
+  });
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  const loginTestCases = [
+    {
+      description: 'Login with valid credentials',
+      username: credentials.validUser.username,
+      password: credentials.validUser.password,
+      shouldSucceed: true,
+    },
+    {
+      description: 'Login with incorrect username',
+      username: 'styudent', // Incorrect username
+      password: credentials.validUser.password,
+      shouldSucceed: false,
+    },
+    {
+      description: 'Login with incorrect password',
+      username: credentials.validUser.username,
+      password: 'incorrrectpw', // Incorrect password
+      shouldSucceed: false,
+    },
+  ];
 
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
+  for (const testCase of loginTestCases) {
+    test(testCase.description, async ({ page }) => {
+      await loginPage.enterUsername(page, testCase.username);
+      await loginPage.enterPassword(page, testCase.password);
+      await loginPage.clickLoginButton(page);
 
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+      if (testCase.shouldSucceed) {
+        await loginPage.assertLoginSuccess(page);
+      } else {
+        await loginPage.assertLoginFailure(page);
+      }
+    });
+  }
 });
