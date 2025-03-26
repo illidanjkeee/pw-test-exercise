@@ -37,16 +37,4 @@ export class LoginPage {
         const errorMessage = await page.locator('#error').textContent();
         expect(errorMessage).toMatch(/Your username is invalid!|Your password is invalid!/);
     }
-
-    async assertLoginPage(page: any) {
-        const loginPageTitle = await page.title();
-        expect(loginPageTitle).toContain('Test Login | Practice Test Automation');
-    }
-
-    async login(page: Page, username: string, password: string): Promise<void> {
-        this.assertLoginPage(page);
-        this.enterUsername(page, username);
-        this.enterPassword(page, password);
-        this.clickLoginButton(page);
-    }
 }
