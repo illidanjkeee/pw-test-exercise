@@ -1,6 +1,6 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import { LoginPage } from '../page-objects/loginPage';
-const credentials = require('../util/credentials.json');
+import credentials from '../util/credentials.json';
 
 test.describe('Login Tests', () => {
   let loginPage: LoginPage;
@@ -19,14 +19,14 @@ test.describe('Login Tests', () => {
     },
     {
       description: 'Login with incorrect username',
-      username: 'styudent', // Incorrect username
+      username: credentials.invalidUsername, // Incorrect username
       password: credentials.validUser.password,
       shouldSucceed: false,
     },
     {
       description: 'Login with incorrect password',
       username: credentials.validUser.username,
-      password: 'incorrrectpw', // Incorrect password
+      password: credentials.invalidPassword, // Incorrect password
       shouldSucceed: false,
     },
   ];

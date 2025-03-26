@@ -50,5 +50,3 @@ export class LoginPage {
         this.clickLoginButton(page);
     }
 }
-
-// module.exports = { LoginPage };
